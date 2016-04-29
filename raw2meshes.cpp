@@ -47,7 +47,6 @@ int main(int argc, char* argv[])
  std::set<C3t3::Subdomain_index> labelset;
  for(unsigned int i = 0; i< sx*sy*sz; i++)
     labelset.insert( ((unsigned char*)image.data() )[ i ] );
-
   std::cout << "Found "<< labelset.size()<< " labels."<<std::endl;
 
   // Output
