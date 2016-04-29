@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
   // Domain
   Mesh_domain domain(image);
   // Mesh criteria
-  Mesh_criteria criteria(facet_angle=30, facet_size=1, facet_distance=3,
+  Mesh_criteria criteria(facet_angle=30, facet_size=1.5, facet_distance=3,
                          cell_radius_edge_ratio=3, cell_size=8);
   // Meshing
   C3t3 c3t3 = CGAL::make_mesh_3<C3t3>(domain, criteria);
