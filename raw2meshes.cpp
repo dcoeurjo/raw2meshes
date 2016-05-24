@@ -38,10 +38,23 @@ int main(int argc, char* argv[])
   // Domain
   Mesh_domain domain(image);
   // Mesh criteria
-  Mesh_criteria criteria(facet_angle=30, facet_size=1.5, facet_distance=3,
-                         cell_radius_edge_ratio=3, cell_size=8);
+  Mesh_criteria criteria(facet_angle=20, facet_size=4, facet_distance=4,
+                         cell_radius_edge_ratio=2, cell_size=2);
   // Meshing
-  C3t3 c3t3 = CGAL::make_mesh_3<C3t3>(domain, criteria);
+//  C3t3 c3t3 = CGAL::make_mesh_3<C3t3>(domain, criteria);
+
+// Mesh generation and optimization in one call
+  C3t3 c3t3 = CGAL::make_mesh_3<C3t3>(domain, criteria,
+                                      no_perturb(),
+                                      no_exude());
+
+
+
+  std::cout<<" Lloyd..."<<std::endl;
+  CGAL::lloyd_optimize_mesh_3(c3t3, domain, time_limit=120);
+  std::cout<<" Exude..."<<std::endl;
+  CGAL::exude_mesh_3(c3t3, sliver_bound=5, time_limit=60);
+  std::cout << " Exporting.."<<std::endl;
 
  //Labels
  std::set<C3t3::Subdomain_index> labelset;
